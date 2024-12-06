@@ -57,6 +57,14 @@ const UploadFile = () => {
                     </span>
                     {file && status !== 'uploading' && <button
                     onClick={HandleFileupload} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-[200px]">Upload</button>}
+
+                    {file && status !== 'completed' && (
+                        <div className='text-green-600'>Uploaded Sucessfully</div>
+                    )}
+
+                    {file && status !== 'failed' &&(
+                        <div>Upload failed :(</div>
+                    )}
                 </div>
             )}
            

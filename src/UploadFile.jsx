@@ -25,8 +25,16 @@ const UploadFile = () => {
         formData.append('file',file);
 
         try {
-            await axios.post("https:")
-        } catch {};
+            await axios.post("https://httpbin.org/post", formData, {
+                header: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            setStatus(statuses.COMPLETED);
+        } catch {
+            setStatus(statuses.FAILED)
+        };
     }
 
      console.log(file)
@@ -47,7 +55,8 @@ const UploadFile = () => {
                     <span>
                         {file.type}
                     </span>
-                    {file && status !== 'uploading' && <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-[200px]">Upload</button>}
+                    {file && status !== 'uploading' && <button
+                    onClick={HandleFileupload} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-[200px]">Upload</button>}
                 </div>
             )}
            

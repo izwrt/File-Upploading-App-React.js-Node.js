@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const statuses = {
     IDLE: 'idle',
@@ -9,23 +9,28 @@ const statuses = {
   };
 
 const UploadFile = () => {
-    const [file, setFile] = useState(null);
+    const [files, setFiles] = useState([]);
     const [status, setStatus] = useState(statuses.IDLE); 
     const [progressBar, setProgressBar] = useState(null);
+    const
 
     function fileHandle(e) {
         e.preventDefault();
-        setFile(e.target.files[0])
+        const {files} = e.target;
+        setFiles(Array.from(files))
     }
 
     async function HandleFileupload(e) {
         e.preventDefault();
-        if(!file) return;
+        if (files.length === 0) return;
         setProgressBar(0);
         setStatus(statuses.UPLOADING);
 
         const formData = new FormData();
-        formData.append('file',file);
+        files.forEach((file) => {
+            formData.append('file',file);
+        })
+        
 
         try {
             await axios.post("https://httpbin.org/post", formData, {
@@ -46,15 +51,17 @@ const UploadFile = () => {
         };
     }
 
-     console.log(file)
+     console.log(files)
 
     return(
         <div className="text-xl space-y-10 p-10">
             Upload a file... here
             <input onChange={fileHandle} type='file' multiple/>
             <br/>
-            {file && (
-                <div className='flex flex-col space-y-4 border border-red-300 p-10 w-[400px]'>
+            {files.length > 0 && (
+                <div className='border border-red-300 px-10 pb-10 space-y-10'>
+                {files.map((file,index) => {
+                    return(<div key={index} className='flex flex-col mt-10 w-full'>
                     <span>
                         {file.name}
                     </span>
@@ -64,8 +71,7 @@ const UploadFile = () => {
                     <span>
                         {file.type}
                     </span>
-                    {file && status !== 'uploading' && <button
-                    onClick={HandleFileupload} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-[200px]">Upload</button>}
+                    
 
                     {file && status === 'completed' && (
                         <div className='text-green-600'>Uploaded Sucessfully</div>
@@ -87,6 +93,11 @@ const UploadFile = () => {
                         </div>
                     )
                     }
+                </div>);
+                })
+                }
+                {files.length > 0 && status !== 'uploading' && <button
+                    onClick={HandleFileupload} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-[200px]">Upload</button>}
                 </div>
             )}
            

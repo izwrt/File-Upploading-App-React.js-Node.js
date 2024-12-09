@@ -12,7 +12,7 @@ const UploadFile = () => {
     const [files, setFiles] = useState([]);
     const [status, setStatus] = useState(statuses.IDLE); 
     const [progressBar, setProgressBar] = useState(null);
-    const
+ 
 
     function fileHandle(e) {
         e.preventDefault();

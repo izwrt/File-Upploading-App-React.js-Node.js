@@ -29,11 +29,11 @@ const UploadFile = () => {
 
         try {
             await axios.post("https://httpbin.org/post", formData, {
-                header: {
+                headers: {
                     'Content-Type': 'multipart/form-data'
                 },
                 onUploadProgress: (ProgressEvent) => {
-                    const progress = ProgressEvent.total ? Math.rount((ProgressEvent.loaded * 100) / ProgressEvent.total) : 0;
+                    const progress = ProgressEvent.total ? Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total) : 0;
                     setProgressBar(progress);
                 }
             });
@@ -51,7 +51,7 @@ const UploadFile = () => {
     return(
         <div className="text-xl space-y-10 p-10">
             Upload a file... here
-            <input onChange={fileHandle} type='file'/>
+            <input onChange={fileHandle} type='file' multiple/>
             <br/>
             {file && (
                 <div className='flex flex-col space-y-4 border border-red-300 p-10 w-[400px]'>
@@ -74,6 +74,19 @@ const UploadFile = () => {
                     {file && status === 'failed' &&(
                         <div className='text-red-500'>Upload failed :(</div>
                     )}
+
+                    {status === 'uploading' && (
+                        <div className="space-y-2">
+                            <div className="h-2.5 w-full rounded-2xl bg-gray-200">
+                                <div className="h-2.5 w-full rounded-2xl bg-blue-600 transition-all duration-300"
+                                style={{width: `${progressBar}%`}}>
+
+                                </div>
+                            </div>
+                            <p>{progressBar}</p>
+                        </div>
+                    )
+                    }
                 </div>
             )}
            

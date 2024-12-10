@@ -106,5 +106,3 @@ const UploadFile = () => {
 }
 
 export default UploadFile;
-
-// Displaying the upload ProgressBar 

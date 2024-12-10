@@ -64,8 +64,8 @@ const UploadFile = () => {
     }
 
     return(
-        <div className="text-xl space-y-10 p-10">
-            Upload a file... here
+        <div className="text-xl p-10 flex flex-col">
+            <p className='mb-4'>UPLOAD FILES</p>
             <input onChange={fileHandle} type='file' multiple/>
             <br/>
             {files.length > 0 && (

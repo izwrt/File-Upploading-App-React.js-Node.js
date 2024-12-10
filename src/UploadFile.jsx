@@ -10,8 +10,9 @@ const statuses = {
 
 const UploadFile = () => {
     const [files, setFiles] = useState([]);
-    const [status, setStatus] = useState(statuses.IDLE); 
+    const [status, setStatus] = useState({}); 
     const [progressBar, setProgressBar] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
  
 
     function fileHandle(e) {
@@ -23,16 +24,18 @@ const UploadFile = () => {
     async function HandleFileupload(e) {
         e.preventDefault();
         if (files.length === 0) return;
-        setProgressBar(0);
-        setStatus(statuses.UPLOADING);
+        for (const file of files) {
+            setProgressBar(0);
 
-        const formData = new FormData();
-        files.forEach((file) => {
+            setStatus(prevState => ({
+                ...prevState,
+                [file.name]: {status: statuses.UPLOADING}
+            }));
+
+            setSelectedFile(file.name)
+            const formData = new FormData();
             formData.append('file',file);
-        })
-        
-
-        try {
+            try {
             await axios.post("https://httpbin.org/post", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -43,15 +46,22 @@ const UploadFile = () => {
                 }
             });
 
-            setStatus(statuses.COMPLETED);
+            setStatus(prevState => ({
+                ...prevState,
+                [file.name]: {status: statuses.COMPLETED}
+            }));
+
             setProgressBar(100);
         } catch {
-            setStatus(statuses.FAILED)
+            setStatus(prevState => ({
+                ...prevState,
+                [file.name]: {status: statuses.FAILED}
+            }));
+
             setProgressBar(0);
         };
     }
-
-     console.log(files)
+    }
 
     return(
         <div className="text-xl space-y-10 p-10">
@@ -61,6 +71,7 @@ const UploadFile = () => {
             {files.length > 0 && (
                 <div className='border border-red-300 px-10 pb-10 space-y-10'>
                 {files.map((file,index) => {
+                    const fileStatus = status[file.name]?.status || statuses.IDLE;
                     return(<div key={index} className='flex flex-col mt-10 w-full'>
                     <span>
                         {file.name}
@@ -71,32 +82,36 @@ const UploadFile = () => {
                     <span>
                         {file.type}
                     </span>
+                    <span>
+                    {fileStatus === statuses.COMPLETED && (
+                                <div className="text-green-600">Uploaded Successfully</div>
+                            )}
+
+                            {fileStatus === statuses.FAILED && (
+                                <div className="text-red-500">Upload failed :(</div>
+                            )}
+                    </span>
                     
-
-                    {file && status === 'completed' && (
-                        <div className='text-green-600'>Uploaded Sucessfully</div>
-                    )}
-
-                    {file && status === 'failed' &&(
-                        <div className='text-red-500'>Upload failed :(</div>
-                    )}
-
-                    {status === 'uploading' && (
-                        <div className="space-y-2">
-                            <div className="h-2.5 w-full rounded-2xl bg-gray-200">
-                                <div className="h-2.5 w-full rounded-2xl bg-blue-600 transition-all duration-300"
-                                style={{width: `${progressBar}%`}}>
-
+                    {file.name === selectedFile && (
+                        <>
+                            {status[file.name].status === statuses.UPLOADING && (
+                                <div className="space-y-2">
+                                    <div className="h-2.5 w-full rounded-2xl bg-gray-200">
+                                        <div
+                                            className="h-2.5 w-full rounded-2xl bg-blue-600 transition-all duration-300"
+                                            style={{ width: `${progressBar}%` }}
+                                        ></div>
+                                    </div>
+                                    <p>{progressBar}%</p>
                                 </div>
-                            </div>
-                            <p>{progressBar}</p>
-                        </div>
-                    )
-                    }
+                            )}
+                        </>
+                    )}
+
                 </div>);
                 })
                 }
-                {files.length > 0 && status !== 'uploading' && <button
+                {files.length > 0 && status !== statuses.UPLOADING && <button
                     onClick={HandleFileupload} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-[200px]">Upload</button>}
                 </div>
             )}

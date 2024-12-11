@@ -35,7 +35,9 @@ const UploadFile = () => {
             setSelectedFile(file.name)
             const formData = new FormData();
             formData.append('file',file);
+            console.log(formData);
             try {
+
             await axios.post("https://httpbin.org/post", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -60,8 +62,10 @@ const UploadFile = () => {
 
             setProgressBar(0);
         };
+
     }
     }
+
 
     return(
         <div className="text-xl p-10 flex flex-col">

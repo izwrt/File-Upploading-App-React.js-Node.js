@@ -1,0 +1,17 @@
+# Frontend-specific
+frontend-reactjs/node_modules/
+frontend-reactjs/package-lock.json
+
+frontend-reactjs/dist/
+frontend-reactjs/build/
+
+# Backend-specific
+backend-nodejs-server/node_modules/
+backend-nodejs-server/.env
+backend-nodejs-server/logs/
+
+
+# Outside
+.vscode/
+.vite
+

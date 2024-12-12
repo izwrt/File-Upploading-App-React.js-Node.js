@@ -7,6 +7,10 @@ package-lock.json
 # Build output
 /dist/
 /build/
-
-
 /.vscode/
+
+
+# Backend-specific
+backend/node_modules/
+backend/.env
+backend/logs/

@@ -43,7 +43,7 @@ const UploadFile = () => {
             });
             try {
 
-            await axios.post("https://httpbin.org/post", formData, {
+            await axios.post("http://localhost:3000/upload", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -59,14 +59,15 @@ const UploadFile = () => {
             }));
 
             setProgressBar(100);
-        } catch {
+        }   catch (error) {
+            console.error('Upload failed:', error.response?.data || error.message);
             setStatus(prevState => ({
                 ...prevState,
                 [file.name]: {status: statuses.FAILED}
             }));
-
             setProgressBar(0);
-        };
+        }
+        
 
     }
     }

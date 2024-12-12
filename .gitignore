@@ -11,6 +11,6 @@ package-lock.json
 
 
 # Backend-specific
-backend/node_modules/
-backend/.env
-backend/logs/
+backend-nodejs-server/node_modules/
+backend-nodejs-server/.env
+backend-nodejs-server/logs/

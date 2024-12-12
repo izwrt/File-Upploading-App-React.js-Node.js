@@ -36,7 +36,7 @@ const UploadFile = () => {
             const formData = new FormData();
             formData.append('file',file);
 
-// In the case of FormData, the data you append to it is not enumerable by default, which is why console.log(formData) does not show its contents. This design is intentional because FormData is optimized for network transmission, not for iteration or inspection. 
+// In the case of FormData, the data you append to it is not enumerable by default, which is why console.log(formData) does not show its contents. This design is intentional because FormData is optimized for network transmission, not for iteration or inspection!
 
             formData.forEach((value, key) => {
                 console.log(key, value);

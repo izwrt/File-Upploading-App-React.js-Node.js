@@ -132,4 +132,15 @@ const UploadFile = () => {
 
 export default UploadFile;
 
-//optimize the code and reduce the state --postponed--to--tomorrow
+/* Why Use a Loop for Individual Uploads?
+Your current approach of uploading files one by one in a loop offers the following advantages:
+
+Granular Status Updates: Each file has its own progress bar and status.
+Partial Success: If one file fails, others can still be uploaded.
+Flexibility: You can cancel or retry individual file uploads.
+Optimizing the Loop Approach
+You can make your current per-file upload process more efficient by:
+
+Concurrent Uploads: Instead of uploading files sequentially, upload multiple files concurrently using Promise.all or other async mechanisms.
+Error Handling: Handle errors gracefully for each file without affecting others.
+Retry Mechanism: Add retry logic for failed uploads. */

@@ -27,7 +27,7 @@ This application demonstrates both single and multiple file uploading using **Re
    cd backend
    npm install
    ```
-3.**Setup the Frontend**:
+3.**Setup the Frontend:**
 
    Navigate to the frontend directory and install dependencies:
    

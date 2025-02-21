@@ -21,20 +21,20 @@ This application demonstrates both single and multiple file uploading using **Re
    ```
 2. **Setup the Backend:**
 
-Navigate to the backend directory and install dependencies:
-
-```bash
-cd backend
-npm install
-```
+   Navigate to the backend directory and install dependencies:
+   
+   ```bash
+   cd backend
+   npm install
+   ```
 3.**Setup the Frontend**:
 
-Navigate to the frontend directory and install dependencies:
-
-```bash
-cd ../frontend
-npm install
-```
+   Navigate to the frontend directory and install dependencies:
+   
+   ```bash
+   cd ../frontend
+   npm install
+   ```
 
 How It Works
 Single File Upload:
@@ -43,20 +43,24 @@ Navigate to the single file upload section on the frontend, select a file, and c
 Multiple File Upload:
 Use the multiple file upload section to select several files at once and upload them concurrently.
 
-Folder Structure
-php
-Copy
-Edit
-File-Upploading-App-React.js-Node.js/
-│
-├── backend/                # Node.js backend code (Express & Multer)
-│   ├── uploads/            # Folder for storing uploaded files
-│   ├── server.js           # Main server file
-│   └── package.json        # Backend dependencies and scripts
-│
-├── frontend/               # React frontend code
-│   ├── src/                # React components and assets
-│   ├── public/             # Public static files
-│   └── package.json        # Frontend dependencies and scripts
-│
-└── README.md               # This documentation
+# MIT License
+
+Copyright (c) 2025 Ishwar
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
